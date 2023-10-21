@@ -15,7 +15,12 @@ func main() {
 	// build_launchers := types.CreateLauncher(launchers)
 	// fmt.Println(build_launchers)
 
-	sattelites := parse.GrabAPI("https://isro.vercel.app/api/customer_satellites")
-	build_sattelites, err := types.CreateSattelite(sattelites)
-	fmt.Println(build_sattelites, err)
+	// satellite := parse.GrabAPI("https://isro.vercel.app/api/customer_satellites")
+	// build_sattelites := types.CreateSattelite(satellite)
+	// fmt.Println(build_sattelites)
+
+	centre := parse.GrabAPI("https://isro.vercel.app/api/centres")
+	build_centre := types.CreateCentre(centre)
+	fmt.Println(build_centre)
+
 }
