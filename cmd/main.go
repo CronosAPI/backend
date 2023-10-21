@@ -1,12 +1,12 @@
 package main
 
 import (
-	"backend/internal/parse"
-	"backend/internal/types"
-	"fmt"
+	"backend/internal/database"
 )
 
 func main() {
+	database.CreateDatabase()
+
 	// space_crafts := parse.GrabAPI("https://isro.vercel.app/api/spacecrafts")
 	// build_space_crafts := types.CreateSpaceCraft(space_crafts)
 	// fmt.Println(build_space_crafts)
@@ -19,8 +19,8 @@ func main() {
 	// build_sattelites := types.CreateSattelite(satellite)
 	// fmt.Println(build_sattelites)
 
-	centre := parse.GrabAPI("https://isro.vercel.app/api/centres")
-	build_centre := types.CreateCentre(centre)
-	fmt.Println(build_centre)
+	// centre := parse.GrabAPI("https://isro.vercel.app/api/centres")
+	// build_centre := types.CreateCentre(centre)
+	// fmt.Println(build_centre)
 
 }
