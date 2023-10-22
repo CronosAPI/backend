@@ -2,6 +2,9 @@ package main
 
 import (
 	"backend/internal/database"
+	"backend/internal/parse"
+	"backend/internal/types"
+	"fmt"
 )
 
 func main() {
@@ -19,8 +22,18 @@ func main() {
 	// build_sattelites := types.CreateSattelite(satellite)
 	// fmt.Println(build_sattelites)
 
-	// centre := parse.GrabAPI("https://isro.vercel.app/api/centres")
-	// build_centre := types.CreateCentre(centre)
-	// fmt.Println(build_centre)
+	centre := parse.GrabAPI("https://isro.vercel.app/api/centres")
+	build_centre := types.CreateCentre(centre)
+	fmt.Println(build_centre)
+
+	// database.InsertIntoTable("centres", build_centre)
+	// database.QueryTable("centres")
+
+	launchers := parse.GrabAPI("https://isro.vercel.app/api/launchers")
+	build_launcher := types.CreateLauncher(launchers)
+	// fmt.Println(build_launcher)
+
+	database.InsertIntoTable("launchers", build_launcher)
+	database.QueryTable("launchers")
 
 }
