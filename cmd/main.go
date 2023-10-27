@@ -1,17 +1,21 @@
 package main
 
-import "backend/internal/database"
+import (
+	"backend/internal/api/space/isro"
+	"backend/internal/database"
+	"backend/internal/parse"
+)
 
 func main() {
-	// database.CreateDatabase()
+	var Client = database.InitializeConnection()
 
-	// space_crafts := parse.GrabAPI("https://api.spacexdata.com/v3/payloads")
-	// pretty.Println(string(space_crafts))
-	// build_space_crafts := types.CreateDonki(space_crafts)
+	response1 := parse.GrabAPI(isro.API_ISRO_SPACECRAFTS)
+	response2 := parse.GrabAPI(isro.API_ISRO_LAUNCHERS)
 
-	// pretty.Println(build_space_crafts)
+	isro.InsertData_ISRO_Spacecrafts(Client, response1)
+	isro.GetAllValues_ISRO_Spacecrafts(Client, true)
 
-	// database.InsertIntoTable("spacex_payloads", build_space_crafts)
-	database.QueryTable("satellites")
+	isro.InsertData_ISRO_Launchers(Client, response2)
+	isro.GetAllValues_ISRO_Launchers(Client, true)
 
 }

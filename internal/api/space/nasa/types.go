@@ -1,4 +1,4 @@
-package types
+package nasa
 
 import "encoding/json"
 
