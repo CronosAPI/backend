@@ -9,13 +9,13 @@ import (
 func main() {
 	var Client = database.InitializeConnection()
 
-	response1 := parse.GrabAPI(isro.API_ISRO_SPACECRAFTS)
-	response2 := parse.GrabAPI(isro.API_ISRO_LAUNCHERS)
+	response1 := parse.GrabAPI(isro.API_ISRO_SATELLITES)
+	response2 := parse.GrabAPI(isro.API_ISRO_CENTERS)
 
-	isro.InsertData_ISRO_Spacecrafts(Client, response1)
-	isro.GetAllValues_ISRO_Spacecrafts(Client, true)
+	isro.InsertData_ISRO_Satellites(Client, response1)
+	isro.GetAllValues_ISRO_Satellites(Client, true)
 
-	isro.InsertData_ISRO_Launchers(Client, response2)
-	isro.GetAllValues_ISRO_Launchers(Client, true)
+	isro.InsertData_ISRO_Centers(Client, response2)
+	isro.GetAllValues_ISRO_Centers(Client, true)
 
 }
