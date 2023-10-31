@@ -2,20 +2,15 @@ package main
 
 import (
 	"backend/internal/api/space/isro"
+	"backend/internal/api/space/nasa"
 	"backend/internal/database"
-	"backend/internal/parse"
+	"backend/internal/utils"
 )
 
 func main() {
+	utils.LoadEnvironmentVariables()
 	var Client = database.InitializeConnection()
 
-	response1 := parse.GrabAPI(isro.API_ISRO_SATELLITES)
-	response2 := parse.GrabAPI(isro.API_ISRO_CENTERS)
-
-	isro.InsertData_ISRO_Satellites(Client, response1)
-	isro.GetAllValues_ISRO_Satellites(Client, true)
-
-	isro.InsertData_ISRO_Centers(Client, response2)
-	isro.GetAllValues_ISRO_Centers(Client, true)
-
+	isro.RetrieveAllAndStore_ISRO(Client, true)
+	nasa.RetrieveAllAndStore_NASA(Client, true)
 }
