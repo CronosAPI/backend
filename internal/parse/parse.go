@@ -1,24 +1,32 @@
 package parse
 
 import (
-	"fmt"
-	"io/ioutil"
-	"log"
+	"io"
 	"net/http"
-	"os"
+	"strings"
 )
 
-func GrabAPI(url string) []byte {
-	response, err := http.Get(url)
-
-	if err != nil {
-		fmt.Print(err.Error())
-		os.Exit(1)
+func GrabAPI(url string, params map[string]string) []byte {
+	var queryString string
+	if len(params) > 0 {
+		var queryParams []string
+		for key, value := range params {
+			queryParams = append(queryParams, key+"="+value)
+		}
+		queryString = "?" + strings.Join(queryParams, "&")
 	}
-	responseData, err := ioutil.ReadAll(response.Body)
 
+	fullURL := url + queryString
+
+	response, err := http.Get(fullURL)
 	if err != nil {
-		log.Fatalln(err)
+		return nil
+	}
+	defer response.Body.Close()
+
+	responseData, err := io.ReadAll(response.Body)
+	if err != nil {
+		return nil
 	}
 
 	return responseData
